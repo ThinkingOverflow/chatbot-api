@@ -1,5 +1,6 @@
 package cn.zhizhiport.chatbot.api.test;
 
+import cn.zhizhiport.chatbot.api.domain.ai.IOpenAI;
 import cn.zhizhiport.chatbot.api.domain.zxsq.IZsxqApi;
 import cn.zhizhiport.chatbot.api.domain.zxsq.model.aggregate.Response;
 import cn.zhizhiport.chatbot.api.domain.zxsq.model.req.AnswerReq;
@@ -36,6 +37,9 @@ public class SpringBootRunTest {
     @Resource
     private IZsxqApi zsxqApi;
 
+    @Resource
+    private IOpenAI openAI;
+
     @Test
     public void test_zsxqApi() throws IOException {
         Response response = zsxqApi.searchQuestions(SearchReq.builder().groupId(groupId).cookie(cookie).build());
@@ -58,6 +62,12 @@ public class SpringBootRunTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void test_openAi() throws IOException {
+        String response = openAI.doChatGLM("介绍一下Java");
+        log.info("测试结果：{}", response);
     }
 
 }

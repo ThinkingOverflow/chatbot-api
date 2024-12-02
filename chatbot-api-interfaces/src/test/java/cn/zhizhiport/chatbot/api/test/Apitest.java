@@ -4,6 +4,7 @@ import okhttp3.*;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 单元测试
@@ -58,5 +59,27 @@ public class Apitest {
         Response response = client.newCall(request).execute();
         System.out.println(response.body().string());
 
+    }
+
+
+    @Test
+    public void test_chatGLM() throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS).build();
+        MediaType contentType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(contentType, "{\n\"model\": \"glm-4\",\n" +
+                "\"messages\": [\n" + "{\n" + "\"role\": \"user\",\n" +
+                " \"content\": \"介绍一下java\"\n" + " }\n " + "]\n}");
+        Request request = new Request.Builder()
+                .url("https://open.bigmodel.cn/api/paas/v4/chat/completions")
+                .method("POST", body)
+                .addHeader("Authorization", "Bearer bddbff5644df51983bbf30498aa3a7d4.f0nj41SWvZWH3L6e")
+                .addHeader("User-Agent", "Apifox/1.0.0 (https://apifox.com)")
+                .addHeader("Content-Type", "application/json")
+                .build();
+        Response response = client.newCall(request).execute();
+        System.out.println(response.body().string());
     }
 }
