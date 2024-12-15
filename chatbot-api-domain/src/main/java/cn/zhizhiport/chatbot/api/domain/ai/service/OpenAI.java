@@ -31,7 +31,7 @@ public class OpenAI implements IOpenAI {
                 .writeTimeout(60, TimeUnit.SECONDS).build();
 
         MediaType contentType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(contentType, "{\"model\": \"glm-4\"," +
+        RequestBody body = RequestBody.create(contentType, "{\"model\": \"glm-4v-flash\"," +
                 "\"messages\": [" + "{" + "\"role\": \"user\"," +
                 " \"content\": \"" + question + "\"" + " } " + "]}");
 
