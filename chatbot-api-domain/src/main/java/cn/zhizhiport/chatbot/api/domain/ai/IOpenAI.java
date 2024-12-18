@@ -10,5 +10,5 @@ import java.io.IOException;
  */
 public interface IOpenAI {
 
-    String doChatGLM(String question) throws IOException;
+    String doChatGLM(String question, String apiKey) throws IOException;
 }

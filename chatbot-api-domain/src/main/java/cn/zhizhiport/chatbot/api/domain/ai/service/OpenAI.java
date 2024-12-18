@@ -20,11 +20,11 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class OpenAI implements IOpenAI {
 
-    @Value("${chatglm.api-key}")
-    private String apiKey;
+//    @Value("${chatglm.api-key}")
+//    private String apiKey;
 
     @Override
-    public String doChatGLM(String question) throws IOException {
+    public String doChatGLM(String question, String apiKey) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)

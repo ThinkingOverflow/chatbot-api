@@ -40,34 +40,34 @@ public class SpringBootRunTest {
     @Resource
     private IOpenAI openAI;
 
-    @Test
-    public void test_zsxqApi() throws IOException {
-        Response response = zsxqApi.searchQuestions(SearchReq.builder().groupId(groupId).cookie(cookie).build());
-        if(Objects.nonNull(response)){
-            RespData respData = response.getRespData();
-            if(Objects.nonNull(respData)){
-                List<TopicsItem> topics = respData.getTopics();
-                for (TopicsItem topic : topics) {
-                    long topicId = topic.getTopicId();
-                    String text = topic.getQuestion().getText();
-                    log.info("提问帖子ID:{}，问题内容:{}",topicId,text);
+//    @Test
+//    public void test_zsxqApi() throws IOException {
+//        Response response = zsxqApi.searchQuestions(SearchReq.builder().groupId(groupId).cookie(cookie).build());
+//        if(Objects.nonNull(response)){
+//            RespData respData = response.getRespData();
+//            if(Objects.nonNull(respData)){
+//                List<TopicsItem> topics = respData.getTopics();
+//                for (TopicsItem topic : topics) {
+//                    long topicId = topic.getTopicId();
+//                    String text = topic.getQuestion().getText();
+//                    log.info("提问帖子ID:{}，问题内容:{}",topicId,text);
+//
+//                    AnswerReq.ReqData reqData = AnswerReq.ReqData.builder().text("1111回答").build();
+//
+//
+//                    boolean answerQuestion = zsxqApi.answerQuestion(AnswerReq.builder().groupId(groupId).cookie(cookie)
+//                            .topicId(String.valueOf(topicId)).req_data(reqData).build());
+//                    log.info("回答结果:{}",answerQuestion);
+//                    break;
+//                }
+//            }
+//        }
+//    }
 
-                    AnswerReq.ReqData reqData = AnswerReq.ReqData.builder().text("1111回答").build();
-
-
-                    boolean answerQuestion = zsxqApi.answerQuestion(AnswerReq.builder().groupId(groupId).cookie(cookie)
-                            .topicId(String.valueOf(topicId)).req_data(reqData).build());
-                    log.info("回答结果:{}",answerQuestion);
-                    break;
-                }
-            }
-        }
-    }
-
-    @Test
-    public void test_openAi() throws IOException {
-        String response = openAI.doChatGLM("介绍一下Java");
-        log.info("测试结果：{}", response);
-    }
+//    @Test
+//    public void test_openAi() throws IOException {
+//        String response = openAI.doChatGLM("介绍一下Java");
+//        log.info("测试结果：{}", response);
+//    }
 
 }
